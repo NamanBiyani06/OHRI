@@ -12,6 +12,7 @@ import seaborn as sb # seaborn provides high level functions for creating statis
 import warnings
 warnings.filterwarnings('ignore')
 
+# filling the df 'exel' in preparation for export
 def fill_excel():
     shape = df.shape[0]
     nulls = df[column].isna().sum()
@@ -69,6 +70,8 @@ excel['Statistics'] = stats
 numerics = []
 bools = []
 columns = []
+
+# categorizing columns into sorted pyLists
 for col in data.columns:
     if is_bool_dtype(df[col]) and df.shape[0] - df[col].isna().sum() != 0:
         bools.append(col)
@@ -83,6 +86,7 @@ columns = numerics + bools
 
 print(columns)
 
+# data cleaning
 for column in columns:
     if df.shape[0] - df[column].isna().sum() != 0:
         excel[column] = np.nan
@@ -97,6 +101,7 @@ for column in columns:
 #         if df.shape[0] - df[column].isna().sum() != 0:
 #             excel[column] = np.nan
 
+# data filling
 for column in excel:
     if column != 'Statistics':
         fill_excel()
@@ -104,5 +109,6 @@ for column in excel:
     
 print(excel.head(15))
 
+# data export
 excel.to_excel("Output\data_stats_new.xlsx", index=False, engine="xlsxwriter")
 
