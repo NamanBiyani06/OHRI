@@ -7,31 +7,47 @@ import numpy as np
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
+# kidney failure risk equation function
+# NOTE: this equation has some bugs regarding outputs (negative values)
+# TODO: ask OHRI for updated formula 
 def kfre(eGFR, male, ACR, age):
     if eGFR is np.nan or male is np.nan or ACR is np.nan or age is np.nan:
-        return np.nan
+        return 'No Value'
     
     a = -0.55418 * ((eGFR/5) - 7.22) + 0.26940 * (male - 0.56) + 0.45608 * (np.log(ACR) - 5.2774) - 0.21670 * ((age/10) - 7.04)
     prob = 1.0 - (pow(0.929, a))
     
     return (prob * 100)
 
+# converts gender type to boolean
+# male = 1
+# female = 0
+def gender_to_bool(gender):
+    gender = gender.lower()
+    if gender == 'male': return 1
+    else: return 0
+
 # loading data
 data = pd.read_excel("CleanData\data.xlsx")
 df = pd.DataFrame(data)
 
-print(df.head())
-print(type(df.at[1, 'dob']))
-
+# list to contain all the risk probabilities
+# NOTE: these percentage values are not tied to the pt_id or OHN
 probs = []
 
-for i in range(10):
+# iterate through all data and call kfre
+for i in range(df.shape[0]):
     eGFR = df.at[i, 'c_g_gfr']
-    male = df.at[i, 'gender']
+    male = gender_to_bool(df.at[i, 'gender'])
     ACR = df.at[i, 'spot_acr']
-    age = 2023 - datetime.fromtimestamp(df.at[i, 'dob']).datetime.year
-    probs += kfre(eGFR, male, ACR, age).round(2)
+    age = 2023 - df.at[i, 'dob'].year
+    
+    # filtering out the np.NaN values
+    # NOTE: These values are caused by a lack of data in the original data.xlsx
+    risk = kfre(eGFR, male, ACR, age).round(2)
+    if risk != 'No Value': probs.append(kfre(eGFR, male, ACR, age).round(2))
+    else: pass
 
-# prob = (kfre(26, True, 39.80, 58)).round(3)
-
+# printing out all data
 print("5-year Risk of Kidney Failure: ", probs, sep="")
+
