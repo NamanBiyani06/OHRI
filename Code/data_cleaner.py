@@ -25,5 +25,10 @@ df_filtered = df[df['firstpri_date'] > filter_date]
 # NOTE: Treating cs_pt_alive as a boolean value instead of integer --> 0 = Dead, 1 = Alive
 df_filtered['cs_pt_alive'] = df['cs_pt_alive'].astype(bool)
 
+# NOTE: Creating a new column that is the difference between the firstpri_date and the age. 
+# This is calculated by subtracting the dob from the firstpri_date
+# Age is measured in years, as an integer
+df_filtered['age'] = df_filtered['firstpri_date'].dt.year - df_filtered['dob'].dt.year
+
 # outputting the data to an excel file
 df_filtered.to_excel("CleanData/data.xlsx", index=False)
