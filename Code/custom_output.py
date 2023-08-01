@@ -1,7 +1,7 @@
 # this file is used for printing customized outputs when I don't have the correct data for a report
 import pandas as pd
 
-data = pd.read_excel("CleanData\data.xlsx")
+data = pd.read_excel("CleanData/data.xlsx")
 df = pd.DataFrame(data)
 
 transfers = df['patransf_where'].value_counts()

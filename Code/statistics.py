@@ -11,11 +11,11 @@ import matplotlib as plt
 import seaborn as sb # seaborn provides high level functions for creating statistical charts - built on plt
 
 # importing the data and inserting it into a dataframe
-data = pd.read_excel("CleanData\data.xlsx")
+data = pd.read_excel("CleanData/data.xlsx")
 df = pd.DataFrame(data)
 
 # clearing the file before performing the script
-with open("Output\output.txt", "a") as f: f.truncate(0)
+with open("Output/output.txt", "a") as f: f.truncate(0)
 
 # simple formatting function
 def space():
@@ -27,9 +27,9 @@ def continuous_stats():
     nulls = df[column].isna().sum()
     print("Values: ", (((shape - nulls)/shape) * 100).round(1).astype(str) + '%, ', shape - nulls, " Values, ", nulls, " Null Values", file=f, sep="")
     print("Mean:", df[column].mean().round(3), file=f)
-    print("Median:", df[column].median().round(3), file=f)
-    print("Mode:", df[column].mode()[0].round(3), file=f)
-    print("Range:", (df[column].max() - df[column].min()).round(3), file=f)
+    print("Median:", round(df[column].median(), 3), file=f)
+    print("Mode:", round(df[column].mode()[0], 3), file=f)
+    print("Range:", (round(df[column].max() - df[column].min()), 3), file=f)
 
     # calculating the IQR of pandas column
     quartiles = df[column].quantile([0.25, 0.75])
@@ -72,7 +72,7 @@ def race_stats():
     print("Frequency Percentages", file=f)
     print(freq_percent, file=f)
 
-with open('Output\output.txt', 'a') as f:
+with open('Output/output.txt', 'a') as f:
     for column in df:
         print("Name:", column, file=f)
         print("Datatype: ", df[column].dtype, file=f)

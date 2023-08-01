@@ -7,12 +7,12 @@ import re # regex expressions
 import xlsxwriter # xlsxwriter is used as an export engine
 
 # loading the datasets
-demo = pd.read_excel("CleanData\Demo.xlsx")
-lab = pd.read_excel("CleanData\Lab_i.xlsx")
-measurements = pd.read_excel("CleanData\Measurements.xlsx")
-meds = pd.read_excel("CleanData\Meds_i.xlsx")
-hist = pd.read_excel("CleanData\PR_hist.xlsx")
-status = pd.read_excel("CleanData\status.xlsx")
+demo = pd.read_excel("CleanData/Demo.xlsx")
+lab = pd.read_excel("CleanData/Lab_i.xlsx")
+measurements = pd.read_excel("CleanData/Measurements.xlsx")
+meds = pd.read_excel("CleanData/Meds_i.xlsx")
+hist = pd.read_excel("CleanData/PR_hist.xlsx")
+status = pd.read_excel("CleanData/status.xlsx")
 
 # This can be uncommented in order to view all the columns in the data no matter the data size when the df is printed (unneeded)
 # pd.set_option('display.max_columns', None)
@@ -49,6 +49,6 @@ data['race'] = data['race'].replace('-- Select One --', 'Unknown')
 
 # NOTE: xlsxwriter is used as the export engine in order to avoid the illegal characters in the dataset
 # NOTE: set index to false to prevent creating an unnamed column
-data.to_excel("CleanData\data.xlsx", index=False, engine="xlsxwriter")
+data.to_excel("CleanData/data.xlsx", index=False, engine="xlsxwriter")
 
 print(data.head())

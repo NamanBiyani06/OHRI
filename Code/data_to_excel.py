@@ -20,10 +20,10 @@ def fill_excel():
     if is_bool_dtype(df[column]):
         excel.at[0, column] = 'boolean'
 
-        excel.at[11, column] = df[column].values.sum()
-        excel.at[12, column] = (shape - nulls) - df[column].values.sum()
-        excel.at[13, column] = (df[column].mean() * 100).round(1)
-        excel.at[14, column] = ((1 - df[column].mean()) * 100).round(1)
+        excel.at[13, column] = df[column].values.sum()
+        excel.at[14, column] = (shape - nulls) - df[column].values.sum()
+        excel.at[15, column] = (df[column].mean() * 100).round(1)
+        excel.at[16, column] = ((1 - df[column].mean()) * 100).round(1)
           
     elif is_numeric_dtype(df[column]):
         # calculating the IQR of pandas column
@@ -35,15 +35,17 @@ def fill_excel():
         excel.at[2, column] = nulls
         excel.at[3, column] = (((shape - nulls)/shape ) * 100).round(1)
         excel.at[4, column] = round( df[column].mean(), 3)
-        excel.at[5, column] = df[column].median().round(3)
-        excel.at[6, column] = df[column].mode().values[0].round(3)
-        excel.at[7, column] = (df[column].max() - df[column].min()).round(3)
+        excel.at[5, column] = round(df[column].median(), 3)
+        excel.at[6, column] = round(df[column].mode().values[0], 3)
+        excel.at[7, column] = round(df[column].max() - df[column].min(), 3)
         excel.at[8, column] = quartiles[0.25].round(3)
         excel.at[9, column] = quartiles[0.75].round(3)
         excel.at[10, column] = iqr.round(3)
+        excel.at[11, column] = round(df[column].std(), 3)
+        excel.at[12, column] = round(df[column].var(), 3)
 
 # importing the data and inserting it into a dataframe
-data = pd.read_excel("CleanData\data.xlsx")
+data = pd.read_excel("CleanData/data.xlsx")
 df = pd.DataFrame(data)
 
 # the df that will be exported
@@ -60,6 +62,8 @@ stats = ['Dtype',
          '25%',
          '75%',
          'IQR',
+         'Std',
+         'Var',
          'True',
          'False',
          'True%',
@@ -110,5 +114,5 @@ for column in excel:
 print(excel.head(15))
 
 # data export
-excel.to_excel("Output\data_stats_new.xlsx", index=False, engine="xlsxwriter")
+excel.to_excel("Output/data_stats_new.xlsx", index=False, engine="xlsxwriter")
 
