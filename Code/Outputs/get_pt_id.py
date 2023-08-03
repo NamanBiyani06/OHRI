@@ -54,3 +54,22 @@ print("Patients with a dotransf_pri after today's date.", file=f)
 print(outlier_dotransf_pri.__len__(), "Outlier(s)", file=f)
 print(outlier_dotransf_pri, file=f)
 print("\n", file=f)
+
+
+# NOTE: BMI 45 Outliers
+outlier_bmi45 = df.loc[(df['bmi'] > 45), ['pt_id', 'firstpri_date']].values.tolist()
+outlier_bmi45 = [[pt_id, str(firstpri_date)] for pt_id, firstpri_date in outlier_bmi45]
+print("BMI45 Outliers: ", file=f)
+print("Patients with a BMI > 45 alongside 'firstpri_date'", file=f)
+print(outlier_bmi45.__len__(), "Outlier(s)", file=f)
+print(outlier_bmi45, file=f)
+print("\n", file=f)
+
+# NOTE: PTH Outliers with dates
+outlier_pthdates = df.loc[(df['pth'] > 100), ['pt_id', 'firstpri_date']].values.tolist()
+outlier_pthdates = [[pt_id, str(firstpri_date)] for pt_id, firstpri_date in outlier_pthdates]
+print("PTH Outliers: ", file=f)
+print("Patients with a PTH value > 100 alongside 'firstpri_date'", file=f)
+print(outlier_pthdates.__len__(), "Outlier(s)", file=f)
+print(outlier_pthdates, file=f)
+print("\n", file=f)
