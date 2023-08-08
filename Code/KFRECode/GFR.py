@@ -68,10 +68,10 @@ gfr.gender[data['gender'] == 'Female'] = 2
 gfr.gender[data['gender'] == 'Male'] = 1
 
 # Use 'replace' to map 'Caucasian-White' to 0 and any other value to 1 in the 'race' column
-gfr['race'] = gfr['race'].replace('Caucasian-White', 0).replace({pd.NA: 1, None: 1})
+gfr['race'] = gfr['race'].replace('African', 1).replace({pd.NA: 0, None: 0})
 
 # Use 'apply' with a lambda function to map non-zero values to 1 in the 'race' column
-gfr['race'] = gfr['race'].apply(lambda x: 1 if x != 0 else x)
+gfr['race'] = gfr['race'].apply(lambda x: 0 if x != 1 else x)
 
 # changing all the creatinine from umol/L --> mg/dL (metric to imperial)
 gfr['creat'] = gfr['creat'] / 88.42

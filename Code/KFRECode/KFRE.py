@@ -18,12 +18,17 @@ warnings.filterwarnings('ignore')
 gfr = pd.DataFrame(pd.read_excel('KFRE\gfr.xlsx'))
 df = pd.DataFrame(pd.read_excel('CleanData\data.xlsx'))
 
+# loading low level data
+data = pd.read_excel("CleanData\data.xlsx")
+lowLevelData = pd.DataFrame(data)
+
 # NOTE: 
 # Race: 0 --> Caucasian-White, 1 --> Other
 kfre = gfr[['pt_id', 'gender', 'race', 'age', '2009_GFR', '2021_GFR']].copy()
 
 # NOTE: Unsure of conversions and units
 kfre['acr'] = df['spot_acr']
+kfre['bicarb'] = lowLevelData['total_co2']
 kfre['alb'] = df['alb']
 kfre['calc'] = df['calc']
 kfre['phos'] = df['phos']
