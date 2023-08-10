@@ -53,7 +53,7 @@ def calculate_gfr_2021(row):
         return None  # Return None if the conditions are not met
 
 # loading low level data
-data = pd.read_excel("CleanData\data.xlsx")
+data = pd.read_excel("CleanData/data.xlsx")
 lowLevelData = pd.DataFrame(data)
 
 # creating a high level df

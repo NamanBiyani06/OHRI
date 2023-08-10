@@ -15,11 +15,11 @@ import xlsxwriter
 warnings.filterwarnings('ignore')
 
 # loading the data
-gfr = pd.DataFrame(pd.read_excel('KFRE\gfr.xlsx'))
-df = pd.DataFrame(pd.read_excel('CleanData\data.xlsx'))
+gfr = pd.DataFrame(pd.read_excel('KFRE/gfr.xlsx'))
+df = pd.DataFrame(pd.read_excel('CleanData/data.xlsx'))
 
 # loading low level data
-data = pd.read_excel("CleanData\data.xlsx")
+data = pd.read_excel("CleanData/data.xlsx")
 lowLevelData = pd.DataFrame(data)
 
 # NOTE: 
