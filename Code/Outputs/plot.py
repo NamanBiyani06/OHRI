@@ -1,3 +1,5 @@
+# this file is used to create interactive plotly plots to summarize the data and seek correlation
+
 # imports
 import pandas as pd
 from pandas.api.types import is_string_dtype
@@ -63,3 +65,4 @@ fig.add_annotation(text="2-Year KFRE Prediction", xref="paper", yref="paper",
                    x=0.5, y=-0.15, showarrow=False, font=dict(size=16))
 
 fig.show()
+
