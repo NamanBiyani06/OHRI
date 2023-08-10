@@ -1,0 +1,32 @@
+Next task is to calculate the KFRE for 2 year and 5 year risk rates
+- eGFR from 2009 CKD and 2021 CKD formulas
+
+- 0 is caucasian, 1 is anyone else
+- divide all values of creatinine by 88.42 --> 1mg/dL = 88.4 umol/L
+
+Wednesday Aug. 2nd 2023 Meeting Recap
+- Fix the report
+  - Check all the dates for dates that are past todays date. Get the pt_id for those patients
+  - Calculate the minimum and maximum age for age data
+  - For patransf_where, 0 is potentially death. Remove those patients from the 0 count as they are not alive.
+- Death Issues
+  - Create a different column for death
+  - If patient has died, death column = 1, else 0
+- Outliers
+  - Instead of providing the index of outliers, provide the pt_id of the outliers
+- Race
+  - 1 is african, 0 is everything else
+- New dataset
+  - This dataset is based off of status.xlsx.
+  - Delete the following columns: cs pt alive, cs cod, period, cs cododth, patransf_other, access_iod
+  - Add first_pri_date
+  - Add three boolean columns: Dialysis/Transplantation, Death, Other
+  - Add a column called Event_Date which will be the date that the above events happened.
+  - Dialysis/Transplantation occurs on the dotransf_pri.
+  - Death occurs on the cs_dod.
+  - Other occurs on the fup_date.
+  - If the patient has a dod, Death = 1, else 0
+  - If the patient has a patransf_where of 2-7, Dialysis/Transplantation = 1, else 0
+  - If neither of the above are true, Other = 1, else 0
+- Other
+  - For the 8 variable KFRE dataset, serum bicarbonate is known as total_co2
