@@ -30,3 +30,11 @@ Wednesday Aug. 2nd 2023 Meeting Recap
   - If neither of the above are true, Other = 1, else 0
 - Other
   - For the 8 variable KFRE dataset, serum bicarbonate is known as total_co2
+
+NOTE: UNITS
+- serum phosphorous is measured in mmol/L 
+- serum calcium is measured in mmol/L 
+- albumin is measured in g/L
+- GFR is measured in mL/min/1.73m^2
+- ACR is measured in mg/g 
+- bicarbonate is measured in mEq/L 
