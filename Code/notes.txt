@@ -31,10 +31,41 @@ Wednesday Aug. 2nd 2023 Meeting Recap
 - Other
   - For the 8 variable KFRE dataset, serum bicarbonate is known as total_co2
 
-NOTE: UNITS
-- serum phosphorous is measured in mmol/L 
-- serum calcium is measured in mmol/L 
-- albumin is measured in g/L
-- GFR is measured in mL/min/1.73m^2
-- ACR is measured in mg/g 
-- bicarbonate is measured in mEq/L 
+
+Thursday, Aug. 3rd 2023 Meeting Recap
+FIRST CLEAN DATA
+
+- Discrimination
+- Calibration
+- Brier Score
+
+- If the difference between the first pri date and the last fup date is less than two years, the patient is not useful for validation of the 2 year KFRE as their outcome is not known (This can be fixed by a cox regression, however do not focus on this right now).
+- If the difference between the first pri date and the last fup date is less than five years, the patient is not useful for validation of the 5 year KFRE as their outcome is not known (This can be fixed by a cox regression, however do not focus on this right now).
+- If the patient has died within the 2 year time frame, their outcome is unknown and they are not considered useful either.
+
+- For the 2 year KFRE, the patient must have a fup_date that is at least two years after the first_pri_date and they must not have died within the two year time frame.
+
+- Add 8 variable KFRE
+
+- There is a problem with the calculator. Get the results within ± 
+
+- flow diagram of total number of patients and how many are excluded transfered to: n and percentage
+- exclusions are for 4 variable goes in excluded, not died or transplanted, and left clinic within two years for two year and five year for five year
+
+- What I am looking for with the outcomes is whether or not something happens to the patient within the two year time frame. If they die within 2 years, the outcome == 0. If they receive a transplant or dialysis within 2 years, the outcome == 1. If they receive a transplant/dialysis or they die after 2 years, their outcome is 0. If they are followed for more than 2 years and nothing happens to them in the 2 year time frame, their outcome is 0.
+
+Here's the summary for the code:
+- The first task is to exclude data that is not useful for validation.
+- The patient will be excluded if:
+  - The is a missing KFRE for the time frame (this is possible due to missing input date)
+  - The patient has left the clinic within the time frame, having not died or recieved dialysis/Transplantation
+- The next task is to create an outcome column that will indicate what happened to the patient
+- The patient will be given an outcome of 0 if:
+  - The patient has died within the time frame
+  - The patient has not died, not required dialysis/transplantation within the time frame
+  - They have been followed for at least two or more years but have end the study without an event (other)
+- The patient will be given an outcome of 1 if:
+  - They received dialysis/transplantation within the time frame
+- By following this outcome algorithm, we will end up with a binary dataset, that can be used for discrimination.
+
+An important consideration to note, is that exclusions must be tracked and reported for the creation of the flow chart.
