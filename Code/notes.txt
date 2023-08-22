@@ -63,6 +63,7 @@ Here's the summary for the code:
 - The patient will be given an outcome of 0 if:
   - The patient has died within the time frame
   - The patient has not died, not required dialysis/transplantation within the time frame
+  - The patient has required dialysis/transplantation, or died after the time frame
   - They have been followed for at least two or more years but have end the study without an event (other)
 - The patient will be given an outcome of 1 if:
   - They received dialysis/transplantation within the time frame
