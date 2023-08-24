@@ -25,6 +25,9 @@ def kfre_4var_2y_2009(row):
     ACR = row['acr']
     eGFR = row['2009_GFR']
     
+    if any(pd.isna(val) for val in [male, race, age, ACR, eGFR]):
+        return np.nan
+    
     if(race == 0): coefficient = 0.9751
     else: coefficient = 0.9832
     
@@ -45,6 +48,9 @@ def kfre_4var_2y_2021(row):
     age = row['age']
     ACR = row['acr']
     eGFR = row['2021_GFR']
+    
+    if any(pd.isna(val) for val in [male, race, age, ACR, eGFR]):
+        return np.nan
     
     if(race == 0): coefficient = 0.9751
     else: coefficient = 0.9832
@@ -67,6 +73,9 @@ def kfre_4var_5y_2009(row):
     ACR = row['acr']
     eGFR = row['2009_GFR']
     
+    if any(pd.isna(val) for val in [male, race, age, ACR, eGFR]):
+        return np.nan
+    
     if(race == 0): coefficient = 0.924
     else: coefficient = 0.9365
     
@@ -87,6 +96,9 @@ def kfre_4var_5y_2021(row):
     age = row['age']
     ACR = row['acr']
     eGFR = row['2021_GFR']
+    
+    if any(pd.isna(val) for val in [male, race, age, ACR, eGFR]):
+        return np.nan
     
     if(race == 0): coefficient = 0.924
     else: coefficient = 0.9365
@@ -114,6 +126,9 @@ def kfre_8var_2y_2009(row):
     phos = row['phos']
     bicarb = row['bicarb']
     calc = row['calc']
+    
+    if any(pd.isna(val) for val in [male, race, age, ACR, eGFR, alb, phos, bicarb, calc]):
+        return np.nan
     
     if(race == 0): coefficient = 0.978
     else: coefficient = 0.9827
@@ -143,6 +158,9 @@ def kfre_8var_2y_2021(row):
     bicarb = row['bicarb']
     calc = row['calc']
     
+    if any(pd.isna(val) for val in [male, race, age, ACR, eGFR, alb, phos, bicarb, calc]):
+        return np.nan
+    
     if(race == 0): coefficient = 0.978
     else: coefficient = 0.9827
 
@@ -171,6 +189,9 @@ def kfre_8var_5y_2009(row):
     bicarb = row['bicarb']
     calc = row['calc']
     
+    if any(pd.isna(val) for val in [male, race, age, ACR, eGFR, alb, phos, bicarb, calc]):
+        return np.nan
+    
     if(race == 0): coefficient = 0.9301
     else: coefficient = 0.9245
 
@@ -198,6 +219,9 @@ def kfre_8var_5y_2021(row):
     phos = row['phos']
     bicarb = row['bicarb']
     calc = row['calc']
+    
+    if any(pd.isna(val) for val in [male, race, age, ACR, eGFR, alb, phos, bicarb, calc]):
+        return np.nan
     
     if(race == 0): coefficient = 0.9301
     else: coefficient = 0.9245
